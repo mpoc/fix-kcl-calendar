@@ -12,7 +12,7 @@ repositories {
 	mavenCentral()
 }
 
-task uberJar(type: Jar) {
+task fatJar(type: Jar) {
 	manifest {
         attributes 'Implementation-Title': 'Fix KCL timetable',  
         	'Implementation-Version': '1.0',
