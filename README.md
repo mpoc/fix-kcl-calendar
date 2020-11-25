@@ -21,3 +21,17 @@ gradle fatJar
 ```
 
 The `jar` file packaged with the dependencies will be located in `build/libs/fix-kcl-calendar-all.jar`.
+
+## How to run
+
+### Docker
+
+```console
+docker run -it --name fix-kcl-calendar --rm mpoc/fix-kcl-calendar "URL_TO_CALENDAR" > calendar-adjusted.ics
+```
+
+### Natively
+
+```console
+java -jar fix-kcl-calendar.jar "URL_TO_CALENDAR" > calendar-adjusted.ics
+```
