@@ -15,8 +15,8 @@ import java.util.HashMap;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
-		// PUT YOUR CALENDAR SUBSCRIPTION LINK HERE:
-		InputStream is = new URL("").openStream();
+		String calendarUrl = args[0];
+		InputStream is = new URL(calendarUrl).openStream();
 		CalendarBuilder builder = new CalendarBuilder();
 		Calendar calendar = builder.build(is);
 
