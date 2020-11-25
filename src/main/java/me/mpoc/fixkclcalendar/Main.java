@@ -48,8 +48,9 @@ public class Main {
 			}
 		}
 
-		FileOutputStream fout = new FileOutputStream("calendar-adjusted.ics");
+		// FileOutputStream fout = new FileOutputStream("calendar-adjusted.ics");
 		CalendarOutputter outputter = new CalendarOutputter(false);
-		outputter.output(calendar, fout);
+		// outputter.output(calendar, fout);
+		outputter.output(calendar, System.out);
 	}
 }
