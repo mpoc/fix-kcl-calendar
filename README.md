@@ -1,6 +1,6 @@
 # KCL timetable calendar fixer
 
-This program downloads your KCL timetable calendar from <https://mytimetable.kcl.ac.uk/> and makes the calendar events have pretty names.
+This program downloads your KCL timetable calendar from [KCL MyTimetable](https://mytimetable.kcl.ac.uk/) and makes the calendar events have pretty names.
 
 Example of an unchanged calendar event name: `5CCS2PEP PRACTICAL EXPER SEM1 000001/LECTURE/01 (STRAND BLDG S-2.18)`
 
