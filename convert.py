@@ -18,6 +18,19 @@ def generate_new_lecture_name(lecture_name, lecture_type):
     # Assumes that lecture_name will always be defined
     return (lecture_name + " " + lecture_type) if lecture_type is not None else lecture_name
 
+def guess_lecture_name(event):
+    module_code_map = {
+        '6CCS3AIN': 'Artificial Intelligence Reasoning and Decision Making',
+        '6CCS3AIP': 'Artificial Intelligence Planning',
+        '6CCS3CFL': 'Compilers and Formal Languages',
+        '6CCS3MDE': 'Model-driven Development',
+        '6CCS3ML1': 'Machine Learning',
+        '6CCS3NSE': 'Network Security',
+        '6CCS3PRJ': 'Individual Project'
+    }
+    module_code = str(event['SUMMARY'])[:8]
+    return module_code_map.get(module_code)
+
 def ical_to_string(ical):
     return ical.to_ical().decode("utf-8")
 
@@ -28,7 +41,7 @@ cal = Calendar.from_ical(calendar)
 for event in cal.walk('VEVENT'):
     description = parse_event_description(event)
 
-    lecture_name = description.get('Description')
+    lecture_name = guess_lecture_name(event) or description.get('Description')
     lecture_type = description.get('Event type')
 
     if lecture_name is not None:
