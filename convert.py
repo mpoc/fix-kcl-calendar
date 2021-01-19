@@ -14,9 +14,15 @@ def parse_event_description(event):
 
     return description_elements
 
+# Returns a tuple with (Boolean, String) where the Boolean is whether the name
+# should be modified and String is the name it should be modified to
 def generate_new_lecture_name(lecture_name, lecture_type):
-    # Assumes that lecture_name will always be defined
-    return (lecture_name + " " + lecture_type) if lecture_type is not None else lecture_name
+    if lecture_name is not None and lecture_type is not None:
+        return (True, lecture_name + " " + lecture_type)
+    elif lecture_name is not None and lecture_type is None:
+        return (True, lecture_name)
+    else:
+        return (False, None)
 
 def guess_lecture_name(event, module_code_map):
     module_code = str(event['SUMMARY'])[:8]
@@ -144,7 +150,7 @@ module_code_map = {
     '7CCSMTSP': 'Text Searching and Processing',
     '7CCSMWAL': 'Algorithmic Issues in the World Wide Web',
     '7CCSMWIN': 'Web Infrastructure',
-    '6CCS3MDE': 'Model-driven Development',
+    '6CCS3MDE': 'Model-driven Engineering',
     '6CCS3ML1': 'Machine Learning'
 }
 
@@ -160,8 +166,11 @@ for event in cal.walk('VEVENT'):
     # Attempt to get the event type
     lecture_type = description.get('Event type') or None
 
-    if lecture_name is not None:
-        new_lecture_name = generate_new_lecture_name(lecture_name, lecture_type)
+    lecture_name_modifier = generate_new_lecture_name(lecture_name, lecture_type)
+    name_should_be_modified = lecture_name_modifier[0]
+    new_lecture_name = lecture_name_modifier[1]
+
+    if name_should_be_modified:
         event['SUMMARY'] = vText(new_lecture_name)
 
 print(ical_to_string(cal))
