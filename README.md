@@ -8,30 +8,16 @@ Example of a changed calendar event name: `Practical Experiences of Programming 
 
 I put the adjusted calendar on my website and import the it into my Google Calendar with a link. I also set up a cronjob to run this every day in case the calendar changes.
 
-## How to build
-
-```console
-gradle build
-```
-
-Alternatively, this will package all the code and dependendencies into one `jar` file:
-
-```console
-gradle fatJar
-```
-
-The `jar` file packaged with the dependencies will be located in `build/libs/fix-kcl-calendar-all.jar`.
-
 ## How to run
 
 ### Docker
 
 ```console
-docker run -it --name fix-kcl-calendar --rm mpoc/fix-kcl-calendar "URL_TO_CALENDAR" > calendar-adjusted.ics
+docker run --rm mpoc/fix-kcl-calendar "URL_TO_CALENDAR" > calendar-adjusted.ics
 ```
 
 ### Natively
 
 ```console
-java -jar fix-kcl-calendar.jar "URL_TO_CALENDAR" > calendar-adjusted.ics
+python3 convert.py "URL_TO_CALENDAR" > calendar-adjusted.ics
 ```
