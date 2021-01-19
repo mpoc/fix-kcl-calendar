@@ -4,6 +4,3 @@ calendar-adjusted.ics
 README.md
 Dockerfile
 .dockerignore
-bin
-build
-.gradle
