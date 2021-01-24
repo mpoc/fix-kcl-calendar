@@ -154,6 +154,13 @@ module_code_map = {
     '6CCS3ML1': 'Machine Learning'
 }
 
+event_type_map = {
+    'Online Live Tutorial': 'LGT',
+    'Online Live Small Group': 'SGT',
+    # I'm not sure if this is actually a practical
+    'Online Live Workshop': 'Practical'
+}
+
 url = sys.argv[1]
 calendar = requests.get(url).text
 cal = Calendar.from_ical(calendar)
@@ -163,8 +170,13 @@ for event in cal.walk('VEVENT'):
 
     # Attempt to extract the module name
     lecture_name = guess_lecture_name(event, module_code_map) or description.get('Description') or None
+    
     # Attempt to get the event type
-    lecture_type = description.get('Event type') or None
+    # If there is a mapping of that event type, assign remapped event type
+    # If there is no mapping, assign the raw event type
+    # If there is no event type, assign None
+    raw_event_type = description.get('Event type')
+    lecture_type = event_type_map.get(raw_event_type, raw_event_type) or None
 
     lecture_name_modifier = generate_new_lecture_name(lecture_name, lecture_type)
     name_should_be_modified = lecture_name_modifier[0]
